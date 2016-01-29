@@ -1,0 +1,508 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+/*
+**********************************************************
+Общая часть разметки
+**********************************************************
+*/
+html, body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+body {
+    min-width: 440px;
+    background: #e9ecf0;
+}
+.wrap {
+    width: 96%;
+    padding-left: 2%;
+    padding-right: 2%;
+
+    font: 14px/18px Arial,Helvetica,sans-serif;
+    min-height: 100%;
+    margin-bottom: -50px;
+}
+
+.header {
+    height: 150px;
+    line-height: 150px;
+}
+.header__logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 64px;
+    color: #323b45;
+    display: inline-block;
+    float: left;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+}
+.header__logo span {
+    font-weight: bold;
+    color: #0f7787;
+}
+.content {
+    padding-bottom: 50px;
+}
+.footer {
+    background: #323b45;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+}
+.footer__pride {
+    font-family: Arial,Helvetica,sans-serif;
+    color: #f0f0f0;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    font-size: 14px;
+}
+.footer__pride span {
+    text-decoration: line-through;
+}
+
+.message {
+    background: #323b45;
+    width: 95%;
+    display: inline-block;
+    min-height: 40px;
+    line-height: 40px;
+    font-family: Arial,Helvetica,sans-serif;
+    color: #f0f0f0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+}
+
+/*
+**********************************************************
+колоки с содержимым
+**********************************************************
+*/
+.column {
+    width: 49%;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+    margin-bottom: 50px;
+    float:left;
+    background: #ffffff;
+    color: #5e6e80;
+    border-radius: 5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    overflow: hidden;
+}
+.column__header {
+    height: 50px;
+    background: #323b45;
+    line-height: 50px;
+    color: #edf0f0;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+}
+.column__content {
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    padding-bottom: 25px;
+}
+
+/*
+**********************************************************
+элементы интерфейса
+**********************************************************
+*/
+
+/*
+**********************************************************
+для списков
+**********************************************************
+*/
+.column__content_list {
+    width: 100%;
+    margin-top: 15px;
+    display: inline-block;
+}
+.column__content_list span {
+    display: inline-block;
+    padding-left: 1.5%;
+    padding-right: 1.5%;
+    line-height: 40px;
+}
+.column__content_list__add {
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 32px;
+    background: #0f7787;
+    color: #ffffff;
+    float: right;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.column__content_list__item {
+    height: 42px;
+    width: 100%;
+    line-height: 40px;
+    border: 0px;
+    margin-top: 15px;
+}
+/*
+******************************************************
+комбо из 2 полей
+******************************************************
+*/
+
+
+
+.list_input{
+    border-radius: 5px 0 0 5px;
+    background: #e9ecf0;
+    color: #5e6e80;
+    float: left;
+    width: 76%;
+    border: 0px;
+    height: 40px;
+    font-size: 16px;
+    padding-left: 1.5%;
+    padding-right: 1.5%;
+    margin-right: 0.5%;
+}
+.list_input:focus {
+    outline: none;
+}
+
+.list_select {
+    border-radius: 0 5px 5px 0;
+    background: #e9ecf0;
+    color: #5e6e80;
+    float: left;
+    width: 17.5%;
+    border: 0px;
+    height: 40px;
+    font-size: 16px;
+    padding-left: 1.5%;
+    padding-right: 1.5%;
+}
+
+.list_select:focus {
+    outline: none;
+}
+/*
+**********************************************************
+текстовый инпут
+**********************************************************
+*/
+
+.column__content__input {
+    height: 40px;
+    width:97%;
+    padding-left: 1.5%;
+    padding-right: 1.5%;
+    background: #e9ecf0;
+    line-height: 40px;
+    font-size: 16px;
+    color: #5e6e80;
+    border: 0px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+    margin-top: 15px;
+}
+.column__content__input:focus {
+    outline: none;
+}
+
+/*
+**********************************************************
+чекбокс
+**********************************************************
+*/
+
+.column__content__checkbox {
+    width: 100%;
+    height: 26px;
+    padding-top: 15px;
+}
+.checkbox {
+    vertical-align: top;
+    margin: 0 3px 0 0;
+    width: 100%;
+    margin-top: 10px;
+
+}
+.checkbox + label {
+    cursor: pointer;
+    margin-top: 20px;
+}
+.checkbox:not(checked) {
+    position: absolute;
+    opacity: 0;
+    display:none;
+}
+.checkbox:not(checked) + label {
+    position: relative;
+    padding: 0 0 0 60px;
+}
+.checkbox:not(checked) + label:before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 0;
+    width: 50px;
+    height: 26px;
+    border-radius: 13px;
+    background: #CDD1DA;
+}
+.checkbox:not(checked) + label:after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 2px;
+    width: 22px;
+    height: 22px;
+    border-radius: 10px;
+    background: #FFF;
+    transition: all .2s;
+}
+.checkbox:checked + label:before {
+    background: #0f7787;
+}
+.checkbox:checked + label:after {
+    left: 26px;
+}
+
+/*
+**********************************************************
+кнопка сгенерировать комментарий
+**********************************************************
+*/
+.column__content__submit {
+    width: 100%;
+    height: 40px;
+    margin-top: 25px;
+}
+.column__content__submit button {
+    background: #0f7787;
+    display: block;
+    width: 300px;
+    margin: 0 auto;
+    border: 0px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+    line-height: 40px;
+    font-size: 16px;
+    color: #ffffff;
+    cursor: pointer;
+}
+.column__content__submit button:focus {
+    outline: none;
+}
+/*
+**********************************************************
+кнопки сообщения
+**********************************************************
+*/
+.message span {
+    display: inline-block;
+    float: left;
+}
+.message__buttons {
+    display: inline-block;
+    float:right;
+    width: 320px;
+}
+.message__accept {
+    width: 150px;
+    float: right;
+    background: #0f7787;
+    line-height: 40px;
+    border: 0;
+    border-radius: 5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 0;
+}
+.message__accept:focus {
+    outline: none;
+}
+.message__cancel {
+    width: 150px;
+    float: right;
+    background: #f56c6c;
+    line-height: 40px;
+    border: 0;
+    border-radius: 5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    color: #ffffff;
+    font-size: 16px;
+    margin-left: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+    padding: 0;
+}
+.message__cancel:focus {
+    outline: none;
+}
+
+/*
+**********************************************************
+кнопка скопировать в буфер
+**********************************************************
+*/
+.column__content_list__example {
+    width: 200px;
+    display: inline-block;
+    /*background: #e9ecf0;
+    */
+    background: #ffffff;
+    line-height: 36px;
+    border: 2px solid #e9ecf0;
+    text-align: center;
+    border-radius: 5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    font-size: 16px;
+    margin-left: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+    padding: 0;
+}
+.column__content_list__example:hover {
+    background: #e9ecf0;
+    -webkit-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+
+/*
+**********************************************************
+кнопка добавления теста
+**********************************************************
+*/
+.column__content_list__addTests:before {
+    width: 50px;
+    content: "+";
+    font-size: 32px;
+    text-align: center;
+    display: block;
+    float: left;
+}
+.column__content_list__addTests {
+    background: #0f7787;
+    display: block;
+    width: 195px;
+    margin: 0 auto;
+    border: 0px;
+    line-height: 40px;
+    font-size: 16px;
+    color: #ffffff;
+    cursor: pointer;
+    float: left;
+    border-radius: 5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+}
+/*
+**********************************************************
+кнопка генерирования тестов
+**********************************************************
+*/
+.generate_test {
+    background: #0f7787;
+    display: block;
+    height: 40px;
+    width: 200px;
+    border: 0px;
+    line-height: 40px;
+    font-size: 16px;
+    color: #ffffff;
+    cursor: pointer;
+    float: right;
+    border-radius: 5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+}
+.generate_test:focus{
+    outline: none;
+}
+/*
+************************************************************
+2 текстовых поля в тестх
+************************************************************
+*/
+.list_input__test{
+    border-radius: 5px 0 0 5px;
+    background: #e9ecf0;
+    color: #5e6e80;
+    float: left;
+    width: 46%;
+    border: 0px;
+    height: 40px;
+    font-size: 16px;
+    padding-left: 1.5%;
+    padding-right: 1.5%;
+    margin-right: 0.5%;
+}
+.list_input__test:focus {
+    outline: none;
+}
+
+.list_select__test {
+    border-radius: 0 5px 5px 0;
+    background: #e9ecf0;
+    color: #5e6e80;
+    float: left;
+    width: 47.5%;
+    border: 0px;
+    height: 40px;
+    font-size: 16px;
+    padding-left: 1.5%;
+    padding-right: 1.5%;
+}
+
+.list_select__test:focus {
+    outline: none;
+}
+/*
+**********************************************************
+адаптивность
+**********************************************************
+*/
+@media screen and (max-width: 1399px) {
+    .list_input{ width: 66%; }
+    .list_select { width: 27.5%; }
+}
+@media screen and (max-width: 999px) {
+    .list_input{ width: 76%; }
+    .list_select { width: 17.5%; }
+    .column {clear: both; width: 99%;}
+}
+@media screen and (max-width: 880px) {
+    .message span {  clear: both; width: 100%; text-align: center}
+    .message__buttons { float: none; margin: 0 auto; display: block;}
+}
+@media screen and (max-width: 699px) {
+    .list_input{ width: 66%; }
+    .list_select { width: 27.5%; }
+}
+
+/*
+***********************************************************
+костыль чтобы content растягивался по высоте своих детей
+***********************************************************
+*/
+.content:after {
+    clear: both;
+    display: block;
+    content: " ";
+}
