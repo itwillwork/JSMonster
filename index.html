@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <title> Генерация коментариев в формате JSDoc и тестов под mocha | JSMonster </title>
     <link rel="stylesheet" href="style.css">
+    <script src="shitcode.js"></script>
 </head>
 <body>
 <div class="message">
     <span> Остались данные с прошлого сеанса работы. Восстановить? </span>
     <div class="message__buttons">
-        <button class="message__cancel"> Очистить </button>
-        <button class="message__accept"> Восстановить </button>
+        <button class="message__cancel" id = "deleteDataButton"> Очистить </button>
+        <button class="message__accept" id = "restorageDataButton"> Восстановить </button>
     </div>
 </div>
 <div class="wrap">
@@ -24,16 +25,16 @@
                 Комментарий в стиле JSDoc
             </div>
             <div class = "column__content">
-                <form>
+                <form id = "commentForm">
                     <input class="column__content__input" name = "author" placeholder = "Имя разработчика" >
                     <input class="column__content__input" name = "name" placeholder = "Название функции" >
                     <input class="column__content__input" name = "describe" placeholder = "Что функция делает" >
                     <div class="column__content__checkbox">
                         <input type="checkbox" class="checkbox" name = "constructor" id="constructor" />
-                        <label for="constructor">Функция - конструктор</label>
+                        <label for="constructor" >Функция - конструктор</label>
                     </div>
                     <div class="column__content__checkbox">
-                        <input name="private" type="checkbox" class="checkbox" name="private" id="private" />
+                        <input name="private" type="checkbox" class="checkbox" id="private" />
                         <label for="private">Метод привратный</label>
                     </div>
                     <input class="column__content__input" name = "see" placeholder = "Cвязь с другим объектом" >
@@ -41,36 +42,28 @@
                     <input class="column__content__input" name = "isreturns" placeholder = "Возвращаемое значение" >
                     <div class="column__content_list">
                         <span> Аргументы функции; можно указать тип </span>
-                        <div class="column__content_list__add" > + </div>
+                        <div class="column__content_list__add" id = "addArgumentButton"> + </div>
                     </div>
                     <!-- элемент списка -->
-                    <div class="column__content_list__item">
-                        <input class="list_input" placeholder = "Обозначение и пояснение аргумента" >
-                        <input class="list_select" placeholder = "Тип аргумента" >
-                    </div>
-                    <div class="column__content_list__item">
-                        <input class="list_input" placeholder = "Обозначение и пояснение аргумента" >
-                        <input class="list_select" placeholder = "Тип аргумента" >
+                    <div class="column__content_list__item" id = "argumentNode" >
+                        <input class="list_input" name = "argument0" placeholder = "Обозначение и пояснение аргумента" >
+                        <input class="list_select" name = "typeArgument0" placeholder = "Тип аргумента" >
                     </div>
                     <!-- END элемент списка -->
                     <div class="column__content_list">
                         <span> Исключения, выбрасываемые методом </span>
-                        <div class="column__content_list__add" > + </div>
+                        <div class="column__content_list__add" id = "addExceptionButton" > + </div>
                     </div>
                     <!-- элемент списка -->
-                    <div class="column__content_list__item">
-                        <input class="list_input" placeholder = "Обозначение и пояснение" >
-                        <input class="list_select" placeholder = "Тип аргумента" >
-                    </div>
-                    <div class="column__content_list__item">
-                        <input class="list_input" placeholder = "Обозначение и пояснение" >
-                        <input class="list_select" placeholder = "Тип аргумента" >
+                    <div class="column__content_list__item" id = "exceptionNode">
+                        <input class="list_input" name = "exception0" placeholder = "Обозначение и пояснение исключения" >
+                        <input class="list_select" name = "typeException0" placeholder = "Тип исключения" >
                     </div>
                     <!-- END элемент списка -->
-                    <div class="column__content__submit">
-                        <button type="submit" > Сгенерировать комментарий</button>
-                    </div>
                 </form>
+                    <div class="column__content__submit">
+                        <button id = "submitButton" > Сгенерировать комментарий</button>
+                    </div>
             </div>
         </div>
         <div class="column">
