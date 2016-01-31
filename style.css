@@ -73,6 +73,7 @@ body {
     padding-bottom: 10px;
     padding-left: 2.5%;
     padding-right: 2.5%;
+    display: none;
 }
 
 /*
@@ -305,6 +306,9 @@ body {
 кнопки сообщения
 **********************************************************
 */
+.open {
+    display: block;
+}
 .message span {
     display: inline-block;
     float: left;
@@ -431,6 +435,7 @@ body {
     border-radius: 5px;
     -webkit-border-radius:5px;
     -moz-border-radius:5px;
+    text-align: center;
 }
 .generate_test:focus{
     outline: none;

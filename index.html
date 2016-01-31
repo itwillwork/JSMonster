@@ -4,10 +4,9 @@
     <meta charset="utf-8">
     <title> Генерация коментариев в формате JSDoc и тестов под mocha | JSMonster </title>
     <link rel="stylesheet" href="style.css">
-    <script src="shitcode.js"></script>
 </head>
 <body>
-<div class="message">
+<div class="message" id="cookieMessage">
     <span> Остались данные с прошлого сеанса работы. Восстановить? </span>
     <div class="message__buttons">
         <button class="message__cancel" id = "deleteDataButton"> Очистить </button>
@@ -15,7 +14,6 @@
     </div>
 </div>
 <div class="wrap">
-
     <div class = "header">
         <div class = "header__logo"> <span>JS</span>Monster </div>
     </div>
@@ -42,27 +40,27 @@
                     <input class="column__content__input" name = "isreturns" placeholder = "Возвращаемое значение" >
                     <div class="column__content_list">
                         <span> Аргументы функции; можно указать тип </span>
-                        <div class="column__content_list__add" id = "addArgumentButton"> + </div>
+                        <div class="column__content_list__add" id = "argumentAddButton"> + </div>
                     </div>
                     <!-- элемент списка -->
                     <div class="column__content_list__item" id = "argumentNode" >
-                        <input class="list_input" name = "argument0" placeholder = "Обозначение и пояснение аргумента" >
-                        <input class="list_select" name = "typeArgument0" placeholder = "Тип аргумента" >
+                        <input class="list_input" name = "argumentFirst0" placeholder = "Обозначение и пояснение аргумента" >
+                        <input class="list_select" name = "argumentSecond0" placeholder = "Тип аргумента" >
                     </div>
                     <!-- END элемент списка -->
                     <div class="column__content_list">
                         <span> Исключения, выбрасываемые методом </span>
-                        <div class="column__content_list__add" id = "addExceptionButton" > + </div>
+                        <div class="column__content_list__add" id = "exceptionAddButton" > + </div>
                     </div>
                     <!-- элемент списка -->
                     <div class="column__content_list__item" id = "exceptionNode">
-                        <input class="list_input" name = "exception0" placeholder = "Обозначение и пояснение исключения" >
-                        <input class="list_select" name = "typeException0" placeholder = "Тип исключения" >
+                        <input class="list_input" name = "exceptionFirst0" placeholder = "Обозначение и пояснение исключения" >
+                        <input class="list_select" name = "exceptionSecond0" placeholder = "Тип исключения" >
                     </div>
                     <!-- END элемент списка -->
                 </form>
                     <div class="column__content__submit">
-                        <button id = "submitButton" > Сгенерировать комментарий</button>
+                        <button id = "commentFormSubmit" > Сгенерировать комментарий</button>
                     </div>
             </div>
         </div>
@@ -70,32 +68,30 @@
             <div class = "column__header">
                 Тесты для Mocha
             </div>
+            <form id = "testForm">
             <div class = "column__content">
                 <div class="column__content_list">
                     <span> Шаблон страницы тестов под chai и mocha </span>
-                    <div class="column__content_list__example" > Скопировать в буфер </div>
+                    <div class="column__content_list__example" id = "getTemlateButton" > Скопировать в буфер </div>
                 </div>
                 <div class="column__content_list">
-                    <div class="column__content_list__addTests" > Добавить тест </div>
-                    <button type="submit" class="generate_test"> Сгенерировать тесты </button>
+                    <div class="column__content_list__addTests" id = "testAddButton"> Добавить тест </div>
+                    <div class="generate_test" id = "testsFormSubmit"> Сгенерировать тесты </div>
                 </div>
                 <!-- элемент списка -->
-                <div class="column__content_list__item">
-                    <input class="list_input__test" placeholder = "Входные значения" >
-                    <input class="list_select__test" placeholder = "Выходные значения" >
-                </div>
-                <div class="column__content_list__item">
-                    <input class="list_input__test" placeholder = "Входные значения" >
-                    <input class="list_select__test" placeholder = "Выходные значения" >
+                <div class="column__content_list__item" id = "testNode">
+                    <input class="list_input__test" name = "testFirst0"  placeholder = "Входные значения" >
+                    <input class="list_select__test" name = "testSecond0"  placeholder = "Выходные значения" >
                 </div>
                 <!-- END элемент списка -->
-
             </div>
+            </form>
         </div>
     </div>
 </div>
 <div class = "footer">
     <div class = "footer__pride">2016 &copy Создано руками анонимного <span>маньяка</span> фронтендера</div>
 </div>
+<script src="shitcode.js"></script>
 </body>
 </html>
