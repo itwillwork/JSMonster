@@ -1,10 +1,10 @@
 var baseObject = (function() {
     return {
         addFields : function(typeName, count){
-            var nodeList = document.getElementById(typeName + "Node");
+            var nodeList = document.getElementById(typeName + "Node" + 0);
             var nodePosition = document.getElementById(typeName + "AddButton").parentNode;
             var newNode = nodeList.cloneNode(true);
-            newNode.id = newNode.id + count;
+            newNode.id = typeName + "Node" + count;
             newNode.children[0].value = "";
             newNode.children[0].setAttribute('name', typeName + "First" + count);
             newNode.children[1].value = "";
@@ -30,13 +30,26 @@ var baseObject = (function() {
                 document.getElementById(typeName + "Node" + j).children[1].value = document.getElementById(typeName + "Node" + (j + 1)).children[1].value;
             }
             (document.getElementById(typeName + "Node" + count).parentElement).removeChild(document.getElementById(typeName + "Node" + count));
+        },
+        clearFields : function(typeName) {
+            var listFields = document.getElementById( typeName + "Form").elements;
+            for (var j=0; j<listFields.length; j++) {
+                if (listFields[j].type == "checkbox") {
+                    listFields[j].checked = false;
+                } else {
+                    listFields[j].value = "";
+                }
+            }
         }
-    }
+    };
 })();
 
 var commentObject = (function() {
     var _countArguments = 0;
+    var _maxCountArguments = 4;
     var _countException = 0;
+    var _maxCountException = 4;
+    var _lengthEmptyData = 9;
     return {
         __proto__ : baseObject,
         getDataFromFileds : function() {
@@ -67,18 +80,22 @@ var commentObject = (function() {
                 if (elems["argumentFirst" + i].value || elems["argumentSecond" + i].value) {
                     resultString += "  * @param {" + elems["argumentSecond" + i].value + "} " + elems["argumentFirst" + i].value + "\n";
                 } else {
-                    this.deleteField(i, _countArguments, "argument");
-                    _countArguments--;
-                    i--;
+                    if ((i !== 0) || (_countArguments !== 0)) {
+                        this.deleteField(i, _countArguments, "argument");
+                        _countArguments--;
+                        i--;
+                    }
                 }
             }
             for (var j = 0; j <= _countException; j++) {
                 if (elems["exceptionFirst" + j].value || elems["exceptionSecond" + j].value) {
                     resultString += "  * @exception {" + elems["exceptionSecond" + j].value + "} " + elems["exceptionFirst" + j].value + "\n";
                 } else {
-                    this.deleteField(j, _countException, "exception");
-                    _countException--;
-                    j--;
+                    if ((j !== 0) || (_countException !== 0)) {
+                        this.deleteField(j, _countException, "exception");
+                        _countException--;
+                        j--;
+                    }
                 }
             }
             resultString += "  */\n";
@@ -87,22 +104,31 @@ var commentObject = (function() {
         nameCookie : "dataComments",
         getDataToBuffer : function() {
             var dataFromFields = this.getDataFromFileds();
-            if (this.copyToBuffer(dataFromFields) ) {
-                alert("измененеи кнопки");
-            } else {
-                alert("не получлось скопировать((")
+            if (dataFromFields.length == _lengthEmptyData) {
+                return "Поля пустые";
+            }
+            if (!this.copyToBuffer(dataFromFields)) {
+                return "не получлось скопировать((";
             }
         },
         addArgumentsField: function () {
-            _countArguments++;
-            this.addFields("argument", _countArguments);
+            if (_countArguments == _maxCountArguments) {
+                return "Максимальное число полей аргументов " + (_maxCountArguments + 1);
+            } else {
+                _countArguments++;
+                this.addFields("argument", _countArguments);
+            }
         },
         addExceptionField: function () {
-            _countException++;
-
-            this.addFields("exception", _countException);
+            if (_countException == _maxCountException) {
+                return "Максимальное число полей исключений " + (_maxCountException + 1);
+            } else {
+                _countException++;
+                this.addFields("exception", _countException);
+            }
         },
         setDataFromJSON: function (injectJSON) {
+            if (injectJSON === "") return;
             var dataFromJSON = JSON.parse(injectJSON);
             var formElems = document.getElementById("commentForm").elements;
             formElems.describe.value = dataFromJSON.describe;
@@ -143,7 +169,6 @@ var commentObject = (function() {
             resultJSON += ' "private": ' + document.getElementById("private").checked + ', ';
             resultJSON += ' "countArguments": ' + _countArguments + ', ';
             for (var i = 0; i <= _countArguments; i++) {
-                console.log(i);
                 resultJSON += ' "argumentFirst' + i + '": "' + elems["argumentFirst" + i].value + '", ';
                 resultJSON += ' "argumentSecond' + i + '": "' + elems["argumentSecond" + i].value + '", ';
             }
@@ -156,11 +181,13 @@ var commentObject = (function() {
             resultJSON += ' } ';
             return resultJSON;
         }
-    }
+    };
 }());
 
 var testObject = (function(){
     var _countTests = 0;
+    var _maxCountTests = 14;
+    var _lengthEmptyData = 67;
     var _TEMLATE_TEST = '<!DOCTYPE html>\n<html>\n<head>\n   <meta charset="utf-8">\n   <!-- подключаем стили Mocha, для отображения результатов -->\n   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.css">\n   <!-- подключаем библиотеку Mocha -->\n   <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.js"></script>\n   <!-- настраиваем Mocha: предстоит BDD-тестирование -->\n   <script>\n      mocha.setup("bdd");\n   </script>\n   <!-- подключаем chai -->\n   <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/2.0.0/chai.js"></script>\n   <!-- в chai есть много всего, выносим assert в глобальную область -->\n   <script>\n      var assert = chai.assert;\n   </script>\n</head>\n<body>\n   <!-- в этом скрипте находится тестируемая функция -->\n   <script src="test.js"></script>\n   <!-- в этом скрипте находятся тесты -->\n   <script>\n      /* код функции, пока что пусто */\n   </script>\n   <!-- в элементе с id="mocha" будут результаты тестов -->\n   <div id="mocha"></div>\n   <!-- запустить тесты! -->\n   <script>\n      mocha.run();\n   </script>\n</body>\n</html>';
     return {
         __proto__ : baseObject,
@@ -174,11 +201,13 @@ var testObject = (function(){
                 if (elems["testFirst" + i].value || elems["testSecond" + i].value) {
                     resultString += '        it("при входных данных: ' + elems['testFirst' + i].value + ', выходные данные: ' + elems['testSecond' + i].value + '", function() { \n';
                     resultString += '            assert.equal(' + nameFunction + '(' + elems['testFirst' + i].value + ') ,' + elems['testSecond' + i].value + ');\n';
-                    resultString += '        });\n'
+                    resultString += '        });\n';
                 } else {
-                    this.deleteField(i, _countTests, "test");
-                    _countTests--;
-                    i--;
+                    if ((i !== 0) || (_countTests !== 0)) {
+                        this.deleteField(i, _countTests, "test");
+                        _countTests--;
+                        i--;
+                    }
                 }
             }
             resultString += '    });\n});';
@@ -186,17 +215,23 @@ var testObject = (function(){
         },
         getDataToBuffer : function() {
             var dataFromFields = this.getDataFromFileds();
-            if (this.copyToBuffer(dataFromFields) ) {
-                alert("измененеи кнопки");
-            } else {
-                alert("не получлось скопировать((")
+            if (dataFromFields.length == _lengthEmptyData) {
+                return "Поля пустые";
+            }
+            if (!this.copyToBuffer(dataFromFields) ) {
+                return "не получлось скопировать((";
             }
         },
         addTest : function() {
-            _countTests++;
-            this.addFields("test", _countTests);
+            if (_countTests == _maxCountTests ) {
+                return "Максимальное число тестов " + (_maxCountTests + 1);
+            } else {
+                _countTests++;
+                this.addFields("test", _countTests);
+            }
         },
         setDataFromJSON : function(injectJSON) {
+            if (injectJSON === "") return;
             var dataFromJSON = JSON.parse(injectJSON);
             var formElems = document.getElementById("testForm").elements;
             _countTests = 0;
@@ -204,7 +239,6 @@ var testObject = (function(){
             formElems["testFirst0"].value = dataFromJSON["testFirst0"];
             for (var i = 1; i <= dataFromJSON.countTests; i++) {
                 this.addTest();
-                //!костыль исправить универсальной функций добавления
                 formElems["testSecond" + i].value = dataFromJSON["testSecond" + i];
                 formElems["testFirst" + i].value = dataFromJSON["testFirst" + i];
             }
@@ -226,12 +260,12 @@ var testObject = (function(){
         },
         getTemplateTest : function() {
             if (this.copyToBuffer(_TEMLATE_TEST) ) {
-                alert("измененеи кнопки");
+                return("Шаблон скопирован в буфер");
             } else {
-                alert("не получлось скопировать((")
+                return("не получлось скопировать((");
             }
         }
-    }
+    };
 })();
 
 var cookieWorker = (function(){
@@ -257,70 +291,138 @@ var cookieWorker = (function(){
                 return false;
             }
         }
-    }
+    };
 })();
 
+var messageObject = (function(){
+    return {
+        takeMessage : function(message) {
+            if (message !== undefined) {
+                alert("msg: " + message);
+            }
+        }
+    };
+})();
 
-/***********************************************************
- *
- * херня переделывай
- * БУДУЩИЙ МЕДИАТОР
- */
+var Application = (function(){
+    return {
+        run : function(){
+            if (cookieWorker.existCookie(testObject.nameCookie) || cookieWorker.existCookie(commentObject.nameCookie)) {
+                document.getElementById("cookieMessage").classList.add("open");
+            }
+        },
+        argumentAddButton : function(){
+            messageManager.takeMessage( commentObject.addArgumentsField() );
+        },
+        exceptionAddButton : function(){
+            messageManager.takeMessage( commentObject.addExceptionField() );
+        },
+        commentFormSubmit : function(){
+            var result = commentObject.getDataToBuffer();
+            if (result !== undefined) {
+                messageManager.takeMessage( result );
+            } else {
+                cookieWorker.deleteCookie(commentObject.nameCookie);
+                document.getElementById("cookieMessage").classList.remove("open");
+                cookieWorker.setCookie( commentObject.nameCookie, commentObject.getDataToJSON() );
+                messageManager.takeMessage("Данные скопированы в буфер");
+            }
+        },
+        restorageDataButton : function(){
+            var testsDataFromCookie = cookieWorker.getCookie(testObject.nameCookie);
+            var commentsDataFromCookie = cookieWorker.getCookie(commentObject.nameCookie);
+            if ((testsDataFromCookie === "") && (commentsDataFromCookie === "")) {
+                messageManager.takeMessage("Данных предыдущей сессии нет!!");
+            }
+            testObject.setDataFromJSON(testsDataFromCookie);
+            commentObject.setDataFromJSON(commentsDataFromCookie);
+            cookieWorker.deleteCookie( commentObject.nameCookie );
+            cookieWorker.deleteCookie( testObject.nameCookie );
+            document.getElementById("cookieMessage").classList.remove("open");
+            messageManager.takeMessage("Данные восстановлены");
+        },
+        deleteDataButton : function(){
+            cookieWorker.deleteCookie( commentObject.nameCookie );
+            cookieWorker.deleteCookie( testObject.nameCookie );
+            document.getElementById("cookieMessage").classList.remove("open");
+            messageManager.takeMessage("Данные предыдущей сессии удалены");
+        },
+        testAddButton : function(){
+            messageManager.takeMessage( testObject.addTest() );
+        },
+        getTemlateButton : function(){
+            messageManager.takeMessage( testObject.getTemplateTest() );
+        },
+        testsFormSubmit : function(){
+            var result = testObject.getDataToBuffer();
+            if (result !== undefined) {
+                messageManager.takeMessage( result );
+            } else {
+                cookieWorker.deleteCookie(testObject.nameCookie);
+                document.getElementById("cookieMessage").classList.remove("open");
+                cookieWorker.setCookie(testObject.nameCookie, testObject.getDataToJSON());
+                messageManager.takeMessage("Данные скопированы в буфер");
+            }
+        },
+        clearCommentForm : function(){
+            commentObject.clearFields("comment");
+            messageManager.takeMessage("Все поля очищены");
+        },
+        clearTestsForm : function() {
+            testObject.clearFields("test");
+            messageManager.takeMessage("Все поля очищены");
+        }
+    };
+})();
 
+//класс менеджера сообщений
+var messageManager = (function(){
+    return {
+        takeMessage : function(message) {
+            if (message !== undefined) {
+                this.showMessage(message);
+            }
+        },
+        showMessage : function(message) {
+            var pushmessage = new MessageObject(message);
+            pushmessage.selfDestruction();
+        }
+    };
+})();
+
+//класс сообщения
+function MessageObject(message) {
+
+    this.divmessage = document.createElement('div');
+    this.divmessage.className = "alert";
+    this.divmessage.innerHTML = message;
+    document.getElementById("pool_message").insertBefore(this.divmessage, document.getElementById("pool_message").children[0]);
+
+    this.divmessage.closeDiv = function(){
+        document.getElementById("pool_message").removeChild(this);
+    };
+    this.divmessage.addEventListener("click", this.divmessage.closeDiv);
+    this.selfDestruction = function(){
+        var div = this.divmessage;
+        setTimeout(function() {
+            try {
+                //неизбежный случай, потому что div храниться в замыкании, и там устаревшее значение по сравнению с DOM моделью
+                div.closeDiv();
+            } catch (err) {
+
+            }
+        }, 5000);
+    };
+}
 
 document.onclick = function(event) {
     event = event || window.event;
     var target = event.target || event.srcElement;
-    if (target == document.getElementById("argumentAddButton")) {
-        commentObject.addArgumentsField();
-    }
-    if (target == document.getElementById("exceptionAddButton")) {
-        commentObject.addExceptionField();
-    }
-    if (target == document.getElementById("commentFormSubmit")) {
-        cookieWorker.deleteCookie(commentObject.nameCookie);
-        document.getElementById("cookieMessage").classList.remove("open");
-        commentObject.getDataToBuffer();
-        cookieWorker.setCookie( commentObject.nameCookie, commentObject.getDataToJSON() );
-    }
-    if (target == document.getElementById("restorageDataButton")) {
-        var testsDataFromCookie = cookieWorker.getCookie(testObject.nameCookie);
-        var commentsDataFromCookie = cookieWorker.getCookie(commentObject.nameCookie);
-        if ((testsDataFromCookie === "") && (commentsDataFromCookie === "")) {
-            alert("кук нет!!");
-        }
-        if (testsDataFromCookie !== "") {
-            testObject.setDataFromJSON(testsDataFromCookie);
-        }
-        if (commentsDataFromCookie !== "") {
-            commentObject.setDataFromJSON(commentsDataFromCookie);
-        }
-        cookieWorker.deleteCookie( commentObject.nameCookie );
-        cookieWorker.deleteCookie( testObject.nameCookie );
-        document.getElementById("cookieMessage").classList.remove("open");
-    }
-    if (target == document.getElementById("deleteDataButton")) {
-        cookieWorker.deleteCookie( commentObject.nameCookie );
-        cookieWorker.deleteCookie( testObject.nameCookie );
-        document.getElementById("cookieMessage").classList.remove("open");
-    }
-    if (target == document.getElementById("testAddButton")) {
-        testObject.addTest();
-    }
-    if (target == document.getElementById("getTemlateButton")) {
-        testObject.getTemplateTest();
-    }
-    if (target == document.getElementById("testsFormSubmit")) {
-        // проверка на существование cookie если есть удаление
-        cookieWorker.deleteCookie(testObject.nameCookie);
-        document.getElementById("cookieMessage").classList.remove("open");
-        ///////////////////////////////
-        testObject.getDataToBuffer();
-        cookieWorker.setCookie( testObject.nameCookie, testObject.getDataToJSON() );
-    }
+    try {
+        Application[target.id]();
+    } catch (err) {
 
+    }
 };
-    if (cookieWorker.existCookie(testObject.nameCookie) || cookieWorker.existCookie(commentObject.nameCookie)) {
-        document.getElementById("cookieMessage").classList.add("open");
-    };
 
+Application.run();

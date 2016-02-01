@@ -13,14 +13,17 @@
         <button class="message__accept" id = "restorageDataButton"> Восстановить </button>
     </div>
 </div>
+<div id="pool_message">
+</div>
 <div class="wrap">
     <div class = "header">
-        <div class = "header__logo"> <span>JS</span>Monster </div>
+        <div class = "header__logo"><span>JS</span>Monster</div>
     </div>
     <div class = "content">
         <div class="column">
             <div class = "column__header">
                 Комментарий в стиле JSDoc
+                <a class="link" id = "clearCommentForm"> Очистить </a>
             </div>
             <div class = "column__content">
                 <form id = "commentForm">
@@ -43,7 +46,7 @@
                         <div class="column__content_list__add" id = "argumentAddButton"> + </div>
                     </div>
                     <!-- элемент списка -->
-                    <div class="column__content_list__item" id = "argumentNode" >
+                    <div class="column__content_list__item" id = "argumentNode0" >
                         <input class="list_input" name = "argumentFirst0" placeholder = "Обозначение и пояснение аргумента" >
                         <input class="list_select" name = "argumentSecond0" placeholder = "Тип аргумента" >
                     </div>
@@ -53,20 +56,21 @@
                         <div class="column__content_list__add" id = "exceptionAddButton" > + </div>
                     </div>
                     <!-- элемент списка -->
-                    <div class="column__content_list__item" id = "exceptionNode">
+                    <div class="column__content_list__item" id = "exceptionNode0">
                         <input class="list_input" name = "exceptionFirst0" placeholder = "Обозначение и пояснение исключения" >
                         <input class="list_select" name = "exceptionSecond0" placeholder = "Тип исключения" >
                     </div>
                     <!-- END элемент списка -->
-                </form>
                     <div class="column__content__submit">
-                        <button id = "commentFormSubmit" > Сгенерировать комментарий</button>
+                        <div id = "commentFormSubmit" > Сгенерировать комментарий</div>
                     </div>
+                </form>
             </div>
         </div>
         <div class="column">
             <div class = "column__header">
                 Тесты для Mocha
+                <a class="link" id="clearTestsForm"> Очистить </a>
             </div>
             <form id = "testForm">
             <div class = "column__content">
@@ -79,7 +83,7 @@
                     <div class="generate_test" id = "testsFormSubmit"> Сгенерировать тесты </div>
                 </div>
                 <!-- элемент списка -->
-                <div class="column__content_list__item" id = "testNode">
+                <div class="column__content_list__item" id = "testNode0">
                     <input class="list_input__test" name = "testFirst0"  placeholder = "Входные значения" >
                     <input class="list_select__test" name = "testSecond0"  placeholder = "Выходные значения" >
                 </div>

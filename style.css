@@ -36,6 +36,13 @@ body {
     float: left;
     margin-left: 0.5%;
     margin-right: 0.5%;
+    cursor: default;
+
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 .header__logo span {
     font-weight: bold;
@@ -64,7 +71,6 @@ body {
 .message {
     background: #323b45;
     width: 95%;
-    display: inline-block;
     min-height: 40px;
     line-height: 40px;
     font-family: Arial,Helvetica,sans-serif;
@@ -76,6 +82,9 @@ body {
     display: none;
 }
 
+:focus {
+    outline: none;
+}
 /*
 **********************************************************
 колоки с содержимым
@@ -113,7 +122,56 @@ body {
 элементы интерфейса
 **********************************************************
 */
+/*
+***********************************************************
+Всплывающие сообщения
+**********************************************************
+*/
+#pool_message {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 300px;
+}
+.alert {
+    padding: 15px;
+    margin: 10px;
+    background: #323b45;
+    color: #ffffff;
+    cursor: pointer;
+    opacity: 0.7;
 
+    border-radius: 5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    transition: all .2s;
+}
+.alert:hover {
+    opacity: 0.5;
+    transition: all .2s;
+}
+/*
+**********************************************************
+ссылка Очистить
+**********************************************************
+*/
+.link {
+    display: inline-block;
+    float: right;
+    cursor: pointer;
+
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
 /*
 **********************************************************
 для списков
@@ -141,12 +199,18 @@ body {
     float: right;
     border-radius: 5px;
     cursor: pointer;
+
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 .column__content_list__item {
     height: 42px;
     width: 100%;
     line-height: 40px;
-    border: 0px;
+    border: 0;
     margin-top: 15px;
 }
 /*
@@ -163,15 +227,12 @@ body {
     color: #5e6e80;
     float: left;
     width: 76%;
-    border: 0px;
+    border: 0;
     height: 40px;
     font-size: 16px;
     padding-left: 1.5%;
     padding-right: 1.5%;
     margin-right: 0.5%;
-}
-.list_input:focus {
-    outline: none;
 }
 
 .list_select {
@@ -180,16 +241,13 @@ body {
     color: #5e6e80;
     float: left;
     width: 17.5%;
-    border: 0px;
+    border: 0;
     height: 40px;
     font-size: 16px;
     padding-left: 1.5%;
     padding-right: 1.5%;
 }
 
-.list_select:focus {
-    outline: none;
-}
 /*
 **********************************************************
 текстовый инпут
@@ -205,14 +263,11 @@ body {
     line-height: 40px;
     font-size: 16px;
     color: #5e6e80;
-    border: 0px;
+    border: 0;
     -webkit-border-radius:5px;
     -moz-border-radius:5px;
     border-radius:5px;
     margin-top: 15px;
-}
-.column__content__input:focus {
-    outline: none;
 }
 
 /*
@@ -284,12 +339,12 @@ body {
     height: 40px;
     margin-top: 25px;
 }
-.column__content__submit button {
+.column__content__submit div {
     background: #0f7787;
     display: block;
     width: 300px;
     margin: 0 auto;
-    border: 0px;
+    border: 0;
     -webkit-border-radius:5px;
     -moz-border-radius:5px;
     border-radius:5px;
@@ -297,9 +352,13 @@ body {
     font-size: 16px;
     color: #ffffff;
     cursor: pointer;
-}
-.column__content__submit button:focus {
-    outline: none;
+    text-align: center;
+
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 /*
 **********************************************************
@@ -307,7 +366,7 @@ body {
 **********************************************************
 */
 .open {
-    display: block;
+    display: inline-block;
 }
 .message span {
     display: inline-block;
@@ -333,9 +392,12 @@ body {
     margin-left: 5px;
     margin-right: 5px;
     padding: 0;
-}
-.message__accept:focus {
-    outline: none;
+
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 .message__cancel {
     width: 150px;
@@ -352,10 +414,14 @@ body {
     margin-right: 5px;
     cursor: pointer;
     padding: 0;
+
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
-.message__cancel:focus {
-    outline: none;
-}
+
 
 /*
 **********************************************************
@@ -365,8 +431,6 @@ body {
 .column__content_list__example {
     width: 200px;
     display: inline-block;
-    /*background: #e9ecf0;
-    */
     background: #ffffff;
     line-height: 36px;
     border: 2px solid #e9ecf0;
@@ -379,6 +443,12 @@ body {
     margin-right: 5px;
     cursor: pointer;
     padding: 0;
+
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 .column__content_list__example:hover {
     background: #e9ecf0;
@@ -406,7 +476,7 @@ body {
     display: block;
     width: 195px;
     margin: 0 auto;
-    border: 0px;
+    border: 0;
     line-height: 40px;
     font-size: 16px;
     color: #ffffff;
@@ -415,6 +485,12 @@ body {
     border-radius: 5px;
     -webkit-border-radius:5px;
     -moz-border-radius:5px;
+
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 /*
 **********************************************************
@@ -426,7 +502,7 @@ body {
     display: block;
     height: 40px;
     width: 200px;
-    border: 0px;
+    border: 0;
     line-height: 40px;
     font-size: 16px;
     color: #ffffff;
@@ -436,10 +512,14 @@ body {
     -webkit-border-radius:5px;
     -moz-border-radius:5px;
     text-align: center;
+
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
-.generate_test:focus{
-    outline: none;
-}
+
 /*
 ************************************************************
 2 текстовых поля в тестх
@@ -451,16 +531,14 @@ body {
     color: #5e6e80;
     float: left;
     width: 46%;
-    border: 0px;
+    border: 0;
     height: 40px;
     font-size: 16px;
     padding-left: 1.5%;
     padding-right: 1.5%;
     margin-right: 0.5%;
 }
-.list_input__test:focus {
-    outline: none;
-}
+
 
 .list_select__test {
     border-radius: 0 5px 5px 0;
@@ -468,16 +546,13 @@ body {
     color: #5e6e80;
     float: left;
     width: 47.5%;
-    border: 0px;
+    border: 0;
     height: 40px;
     font-size: 16px;
     padding-left: 1.5%;
     padding-right: 1.5%;
 }
 
-.list_select__test:focus {
-    outline: none;
-}
 /*
 **********************************************************
 адаптивность
