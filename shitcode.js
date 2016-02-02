@@ -1,3 +1,4 @@
+"use strict";
 var baseObject = (function() {
     return {
         addFields : function(typeName, count){
@@ -309,9 +310,11 @@ var Application = (function(){
         run : function(){
             if (cookieWorker.existCookie(testObject.nameCookie) || cookieWorker.existCookie(commentObject.nameCookie)) {
                 document.getElementById("cookieMessage").classList.add("open");
+                Application.rebuildInterface();
             }
         },
         argumentAddButton : function(){
+
             messageManager.takeMessage( commentObject.addArgumentsField() );
         },
         exceptionAddButton : function(){
@@ -323,7 +326,7 @@ var Application = (function(){
                 messageManager.takeMessage( result );
             } else {
                 cookieWorker.deleteCookie(commentObject.nameCookie);
-                document.getElementById("cookieMessage").classList.remove("open");
+                this.closeCookieMessage();
                 cookieWorker.setCookie( commentObject.nameCookie, commentObject.getDataToJSON() );
                 messageManager.takeMessage("Данные скопированы в буфер");
             }
@@ -338,7 +341,7 @@ var Application = (function(){
             commentObject.setDataFromJSON(commentsDataFromCookie);
             cookieWorker.deleteCookie( commentObject.nameCookie );
             cookieWorker.deleteCookie( testObject.nameCookie );
-            document.getElementById("cookieMessage").classList.remove("open");
+            this.closeCookieMessage();
             messageManager.takeMessage("Данные восстановлены");
         },
         deleteDataButton : function(){
@@ -359,7 +362,7 @@ var Application = (function(){
                 messageManager.takeMessage( result );
             } else {
                 cookieWorker.deleteCookie(testObject.nameCookie);
-                document.getElementById("cookieMessage").classList.remove("open");
+                this.closeCookieMessage();
                 cookieWorker.setCookie(testObject.nameCookie, testObject.getDataToJSON());
                 messageManager.takeMessage("Данные скопированы в буфер");
             }
@@ -371,6 +374,13 @@ var Application = (function(){
         clearTestsForm : function() {
             testObject.clearFields("test");
             messageManager.takeMessage("Все поля очищены");
+        },
+        closeCookieMessage : function(){
+            document.getElementById("cookieMessage").classList.remove("open");
+            Application.rebuildInterface();
+        },
+        rebuildInterface : function() {
+            document.getElementById("pool_message").style.top = document.getElementById("cookieMessage").offsetHeight + "px";
         }
     };
 })();
@@ -396,8 +406,10 @@ function MessageObject(message) {
     this.divmessage = document.createElement('div');
     this.divmessage.className = "alert";
     this.divmessage.innerHTML = message;
-    document.getElementById("pool_message").insertBefore(this.divmessage, document.getElementById("pool_message").children[0]);
-
+    //добавление вверх страницы
+    //document.getElementById("pool_message").insertBefore(this.divmessage, document.getElementById("pool_message").children[0]);
+    //добавление последовательно вниз
+    document.getElementById("pool_message").appendChild(this.divmessage);
     this.divmessage.closeDiv = function(){
         document.getElementById("pool_message").removeChild(this);
     };
@@ -423,6 +435,10 @@ document.onclick = function(event) {
     } catch (err) {
 
     }
+};
+
+document.body.onresize = function() {
+    Application.rebuildInterface();
 };
 
 Application.run();

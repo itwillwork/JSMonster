@@ -11,6 +11,7 @@ html, body {
     height: 100%;
 }
 body {
+    font-family: Arial,Helvetica,sans-serif;
     min-width: 440px;
     background: #e9ecf0;
 }
@@ -58,7 +59,6 @@ body {
     line-height: 50px;
 }
 .footer__pride {
-    font-family: Arial,Helvetica,sans-serif;
     color: #f0f0f0;
     padding-left: 2.5%;
     padding-right: 2.5%;
@@ -68,18 +68,33 @@ body {
     text-decoration: line-through;
 }
 
+
+
 .message {
     background: #323b45;
     width: 95%;
     min-height: 40px;
     line-height: 40px;
-    font-family: Arial,Helvetica,sans-serif;
     color: #f0f0f0;
     padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 2.5%;
     padding-right: 2.5%;
     display: none;
+    opacity: 0.7;
+    position: fixed;
+    float: right;
+    transition: all .2s;
+}
+.message:hover {
+    opacity: 1;
+    transition: all .2s;
+}
+#pool_message {
+    position: fixed;
+    right: 0;
+    width: 300px;
+    clear: right;
 }
 
 :focus {
@@ -127,19 +142,12 @@ body {
 Всплывающие сообщения
 **********************************************************
 */
-#pool_message {
-    position: fixed;
-    right: 0;
-    top: 0;
-    width: 300px;
-}
 .alert {
     padding: 15px;
     margin: 10px;
     background: #323b45;
     color: #ffffff;
     cursor: pointer;
-    opacity: 0.7;
 
     border-radius: 5px;
     -webkit-border-radius:5px;
@@ -150,10 +158,27 @@ body {
     -khtml-user-select: none;
     -webkit-user-select: none;
     user-select: none;
+
+    /* для эфекта при наведении */
     transition: all .2s;
+    font-size: 12px;
+    opacity: 0.7;
+    /* для эфекта всплытия */
+    animation-name: alert_animations;
+    animation-duration: 0.4s;
+}
+
+/* эфект всплытия сообщения */
+@keyframes alert_animations {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.7;
+    }
 }
 .alert:hover {
-    opacity: 0.5;
+    opacity: 1;
     transition: all .2s;
 }
 /*
@@ -213,13 +238,12 @@ body {
     border: 0;
     margin-top: 15px;
 }
+
 /*
 ******************************************************
 комбо из 2 полей
 ******************************************************
 */
-
-
 
 .list_input{
     border-radius: 5px 0 0 5px;
@@ -233,6 +257,9 @@ body {
     padding-left: 1.5%;
     padding-right: 1.5%;
     margin-right: 0.5%;
+
+    animation-name: input_animate;
+    animation-duration: 0.4s;
 }
 
 .list_select {
@@ -246,6 +273,9 @@ body {
     font-size: 16px;
     padding-left: 1.5%;
     padding-right: 1.5%;
+
+    animation-name: input_animate;
+    animation-duration: 0.4s;
 }
 
 /*
@@ -268,6 +298,9 @@ body {
     -moz-border-radius:5px;
     border-radius:5px;
     margin-top: 15px;
+
+    animation-name: input_animate;
+    animation-duration: 0.4s;
 }
 
 /*
@@ -365,8 +398,19 @@ body {
 кнопки сообщения
 **********************************************************
 */
+/* анимация появления сообщения */
+@keyframes message_animate {
+    from {
+        margin-top: -200px;
+    }
+    to {
+        margin-top: 0;
+    }
+}
 .open {
     display: inline-block;
+    animation-name: message_animate;
+    animation-duration: 1s;
 }
 .message span {
     display: inline-block;
@@ -452,10 +496,7 @@ body {
 }
 .column__content_list__example:hover {
     background: #e9ecf0;
-    -webkit-transition-duration: 0.3s;
-    -o-transition-duration: 0.3s;
-    -moz-transition-duration: 0.3s;
-    transition-duration: 0.3s;
+    transition: all .2s;
 }
 
 /*
@@ -525,6 +566,16 @@ body {
 2 текстовых поля в тестх
 ************************************************************
 */
+/* анимация для появления всех полей */
+@keyframes input_animate {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 .list_input__test{
     border-radius: 5px 0 0 5px;
     background: #e9ecf0;
@@ -537,8 +588,10 @@ body {
     padding-left: 1.5%;
     padding-right: 1.5%;
     margin-right: 0.5%;
-}
 
+    animation-name: input_animate;
+    animation-duration: 0.4s;
+}
 
 .list_select__test {
     border-radius: 0 5px 5px 0;
@@ -551,6 +604,9 @@ body {
     font-size: 16px;
     padding-left: 1.5%;
     padding-right: 1.5%;
+
+    animation-name: input_animate;
+    animation-duration: 0.4s;
 }
 
 /*
