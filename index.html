@@ -6,20 +6,20 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="message" id="cookieMessage">
+<div class="cookie-message" id="cookieMessage">
     <span> Остались данные с прошлого сеанса работы. Восстановить? </span>
-    <div class="message__buttons">
-        <button class="message__cancel" id = "deleteDataButton"> Очистить </button>
-        <button class="message__accept" id = "restorageDataButton"> Восстановить </button>
+    <div class="cookie-message__buttons">
+        <button class="cookie-message__cancel" id = "deleteDataButton"> Очистить </button>
+        <button class="cookie-message__accept" id = "restorageDataButton"> Восстановить </button>
     </div>
 </div>
-<div id="pool_message">
+<div id="pool-message">
 </div>
 <div class="wrap">
-    <div class = "header">
-        <div class = "header__logo"><span>JS</span>Monster</div>
+    <div class = "wrap__header">
+        <div class = "logo"><span>JS</span>Monster</div>
     </div>
-    <div class = "content">
+    <div class = "wrap__content">
         <div class="column">
             <div class = "column__header">
                 Комментарий в стиле JSDoc
@@ -27,41 +27,41 @@
             </div>
             <div class = "column__content">
                 <form id = "commentForm">
-                    <input class="column__content__input" name = "author" placeholder = "Имя разработчика" >
-                    <input class="column__content__input" name = "name" placeholder = "Название функции" >
-                    <input class="column__content__input" name = "describe" placeholder = "Что функция делает" >
-                    <div class="column__content__checkbox">
-                        <input type="checkbox" class="checkbox" name = "constructor" id="constructor" />
+                    <input class="text-input--full" name = "author" placeholder = "Имя разработчика" >
+                    <input class="text-input--full" name = "name" placeholder = "Название функции" >
+                    <input class="text-input--full" name = "describe" placeholder = "Что функция делает" >
+                    <div class="checkbox-input">
+                        <input type="checkbox" class="checkbox-input__input" name = "constructor" id="constructor" />
                         <label for="constructor" >Функция - конструктор</label>
                     </div>
-                    <div class="column__content__checkbox">
-                        <input name="private" type="checkbox" class="checkbox" id="private" />
+                    <div class="checkbox-input">
+                        <input type="checkbox" class="checkbox-input__input" name="private" id="private" />
                         <label for="private">Метод привратный</label>
                     </div>
-                    <input class="column__content__input" name = "see" placeholder = "Cвязь с другим объектом" >
-                    <input class="column__content__input" name = "isthis" placeholder = "На что указывает ключевое слово «this» внутри функции" >
-                    <input class="column__content__input" name = "isreturns" placeholder = "Возвращаемое значение" >
-                    <div class="column__content_list">
+                    <input class="text-input--full" name = "see" placeholder = "Cвязь с другим объектом" >
+                    <input class="text-input--full" name = "isthis" placeholder = "На что указывает ключевое слово «this» внутри функции" >
+                    <input class="text-input--full" name = "isreturns" placeholder = "Возвращаемое значение" >
+                    <div class="block-inputs">
                         <span> Аргументы функции; можно указать тип </span>
-                        <div class="column__content_list__add" id = "argumentAddButton"> + </div>
+                        <div class="block-inputs__add-item-button" id = "argumentAddButton"> + </div>
                     </div>
                     <!-- элемент списка -->
-                    <div class="column__content_list__item" id = "argumentNode0" >
-                        <input class="list_input" name = "argumentFirst0" placeholder = "Обозначение и пояснение аргумента" >
-                        <input class="list_select" name = "argumentSecond0" placeholder = "Тип аргумента" >
+                    <div class="block-inputs__item" id = "argumentNode0" >
+                        <input class="text-input--left" name = "argumentFirst0" placeholder = "Обозначение и пояснение аргумента" >
+                        <input class="text-input--right" name = "argumentSecond0" placeholder = "Тип аргумента" >
                     </div>
                     <!-- END элемент списка -->
-                    <div class="column__content_list">
+                    <div class="block-inputs">
                         <span> Исключения, выбрасываемые методом </span>
-                        <div class="column__content_list__add" id = "exceptionAddButton" > + </div>
+                        <div class="block-inputs__add-item-button" id = "exceptionAddButton" > + </div>
                     </div>
                     <!-- элемент списка -->
-                    <div class="column__content_list__item" id = "exceptionNode0">
-                        <input class="list_input" name = "exceptionFirst0" placeholder = "Обозначение и пояснение исключения" >
-                        <input class="list_select" name = "exceptionSecond0" placeholder = "Тип исключения" >
+                    <div class="block-inputs__item" id = "exceptionNode0">
+                        <input class="text-input--left" name = "exceptionFirst0" placeholder = "Обозначение и пояснение исключения" >
+                        <input class="text-input--right" name = "exceptionSecond0" placeholder = "Тип исключения" >
                     </div>
                     <!-- END элемент списка -->
-                    <div class="column__content__submit">
+                    <div class="submit-input--comment">
                         <div id = "commentFormSubmit" > Сгенерировать комментарий</div>
                     </div>
                 </form>
@@ -73,22 +73,22 @@
                 <a class="link" id="clearTestsForm"> Очистить </a>
             </div>
             <form id = "testForm">
-            <div class = "column__content">
-                <div class="column__content_list">
-                    <span> Шаблон страницы тестов под chai и mocha </span>
-                    <div class="column__content_list__example" id = "getTemlateButton" > Скопировать в буфер </div>
+                <div class = "column__content">
+                    <div class="block-inputs">
+                        <span> Шаблон страницы тестов под chai и mocha </span>
+                        <div class="submit-input--example" id = "getTemlateButton" > Скопировать в буфер </div>
+                    </div>
+                    <div class="block-inputs">
+                        <div class="block-inputs__add-item-button--test" id = "testAddButton"> Добавить тест </div>
+                        <div class="submit-input--test" id = "testsFormSubmit"> Сгенерировать тесты </div>
+                    </div>
+                    <!-- элемент списка -->
+                    <div class="block-inputs__item" id = "testNode0">
+                        <input class="text-input--left-test" name = "testFirst0"  placeholder = "Входные значения" >
+                        <input class="text-input--right-test" name = "testSecond0"  placeholder = "Выходные значения" >
+                    </div>
+                    <!-- END элемент списка -->
                 </div>
-                <div class="column__content_list">
-                    <div class="column__content_list__addTests" id = "testAddButton"> Добавить тест </div>
-                    <div class="generate_test" id = "testsFormSubmit"> Сгенерировать тесты </div>
-                </div>
-                <!-- элемент списка -->
-                <div class="column__content_list__item" id = "testNode0">
-                    <input class="list_input__test" name = "testFirst0"  placeholder = "Входные значения" >
-                    <input class="list_select__test" name = "testSecond0"  placeholder = "Выходные значения" >
-                </div>
-                <!-- END элемент списка -->
-            </div>
             </form>
         </div>
     </div>

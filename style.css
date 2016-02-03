@@ -1,9 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
-
 /*
-**********************************************************
+============================================================
 Общая часть разметки
-**********************************************************
+============================================================
 */
 html, body {
     padding: 0;
@@ -12,24 +11,186 @@ html, body {
 }
 body {
     font-family: Arial,Helvetica,sans-serif;
-    min-width: 440px;
     background: #e9ecf0;
 }
+:focus {
+    outline: none;
+}
+/*
+============================================================
+разметка страницы
+============================================================
+*/
 .wrap {
+    z-index: 1;
     width: 96%;
     padding-left: 2%;
     padding-right: 2%;
-
+    min-width: 440px;
     font: 14px/18px Arial,Helvetica,sans-serif;
     min-height: 100%;
     margin-bottom: -50px;
 }
-
-.header {
+.wrap__header {
     height: 150px;
     line-height: 150px;
 }
-.header__logo {
+.wrap__content {
+    padding-bottom: 50px;
+}
+/*
+============================================================
+подвал
+============================================================
+*/
+.footer {
+    background: #323b45;
+    min-width: 440px;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+}
+.footer__pride {
+    color: #f0f0f0;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    font-size: 14px;
+}
+.footer__pride span {
+    text-decoration: line-through;
+}
+/*
+============================================================
+блок сообщения для востановление информации из кук
+============================================================
+*/
+.cookie-message {
+    z-index: 100;
+    background: #323b45;
+    width: 95%;
+    min-width: 440px;
+    min-height: 40px;
+    line-height: 40px;
+    color: #f0f0f0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    display: none;
+    opacity: 0.7;
+    position: fixed;
+    float: right;
+    transition: all .2s;
+}
+.cookie-message:hover {
+    opacity: 1;
+    transition: all .2s;
+}
+.cookie-message--open {
+    display: inline-block;
+    animation-name: message_animate;
+    animation-duration: 1s;
+}
+.cookie-message span {
+    display: inline-block;
+    float: left;
+}
+.cookie-message__buttons {
+    display: inline-block;
+    float:right;
+    width: 320px;
+}
+.cookie-message__accept {
+    width: 150px;
+    float: right;
+    background: #0f7787;
+    line-height: 40px;
+    border: 0;
+    border-radius: 5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 0;
+
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+.cookie-message__cancel {
+    width: 150px;
+    float: right;
+    background: #f56c6c;
+    line-height: 40px;
+    border: 0;
+    border-radius: 5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    color: #ffffff;
+    font-size: 16px;
+    margin-left: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+    padding: 0;
+
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+/*
+============================================================
+блок сообщений
+============================================================
+*/
+#pool-message {
+    z-index: 100;
+    position: fixed;
+    right: 0;
+    width: 300px;
+    clear: right;
+}
+.pool-message__message--alert {
+    padding: 15px;
+    margin: 10px;
+    background: #323b45;
+    color: #ffffff;
+    cursor: pointer;
+
+    border-radius: 5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+
+    /* для эфекта при наведении */
+    transition: all .2s;
+    font-size: 12px;
+    opacity: 0.7;
+    /* для эфекта всплытия */
+    animation-name: alert_animations;
+    animation-duration: 0.4s;
+}
+.pool-message__message--alert:hover {
+    opacity: 1;
+    transition: all .2s;
+}
+/*
+============================================================
+логотип
+============================================================
+*/
+.logo {
     font-family: 'Montserrat', sans-serif;
     font-size: 64px;
     color: #323b45;
@@ -45,65 +206,14 @@ body {
     -webkit-user-select: none;
     user-select: none;
 }
-.header__logo span {
+.logo span {
     font-weight: bold;
     color: #0f7787;
 }
-.content {
-    padding-bottom: 50px;
-}
-.footer {
-    background: #323b45;
-    width: 100%;
-    height: 50px;
-    line-height: 50px;
-}
-.footer__pride {
-    color: #f0f0f0;
-    padding-left: 2.5%;
-    padding-right: 2.5%;
-    font-size: 14px;
-}
-.footer__pride span {
-    text-decoration: line-through;
-}
-
-
-
-.message {
-    background: #323b45;
-    width: 95%;
-    min-height: 40px;
-    line-height: 40px;
-    color: #f0f0f0;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 2.5%;
-    padding-right: 2.5%;
-    display: none;
-    opacity: 0.7;
-    position: fixed;
-    float: right;
-    transition: all .2s;
-}
-.message:hover {
-    opacity: 1;
-    transition: all .2s;
-}
-#pool_message {
-    position: fixed;
-    right: 0;
-    width: 300px;
-    clear: right;
-}
-
-:focus {
-    outline: none;
-}
 /*
-**********************************************************
+============================================================
 колоки с содержимым
-**********************************************************
+============================================================
 */
 .column {
     width: 49%;
@@ -131,60 +241,10 @@ body {
     padding-right: 2.5%;
     padding-bottom: 25px;
 }
-
 /*
-**********************************************************
-элементы интерфейса
-**********************************************************
-*/
-/*
-***********************************************************
-Всплывающие сообщения
-**********************************************************
-*/
-.alert {
-    padding: 15px;
-    margin: 10px;
-    background: #323b45;
-    color: #ffffff;
-    cursor: pointer;
-
-    border-radius: 5px;
-    -webkit-border-radius:5px;
-    -moz-border-radius:5px;
-
-    -ms-user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
-
-    /* для эфекта при наведении */
-    transition: all .2s;
-    font-size: 12px;
-    opacity: 0.7;
-    /* для эфекта всплытия */
-    animation-name: alert_animations;
-    animation-duration: 0.4s;
-}
-
-/* эфект всплытия сообщения */
-@keyframes alert_animations {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 0.7;
-    }
-}
-.alert:hover {
-    opacity: 1;
-    transition: all .2s;
-}
-/*
-**********************************************************
+============================================================
 ссылка Очистить
-**********************************************************
+============================================================
 */
 .link {
     display: inline-block;
@@ -198,22 +258,29 @@ body {
     user-select: none;
 }
 /*
-**********************************************************
-для списков
-**********************************************************
+============================================================
+для списков полей
+============================================================
 */
-.column__content_list {
+.block-inputs {
     width: 100%;
     margin-top: 15px;
     display: inline-block;
 }
-.column__content_list span {
+.block-inputs span {
     display: inline-block;
     padding-left: 1.5%;
     padding-right: 1.5%;
     line-height: 40px;
 }
-.column__content_list__add {
+.block-inputs__item {
+    height: 42px;
+    width: 100%;
+    line-height: 40px;
+    border: 0;
+    margin-top: 15px;
+}
+.block-inputs__add-item-button {
     height: 40px;
     width: 40px;
     line-height: 40px;
@@ -231,280 +298,7 @@ body {
     -webkit-user-select: none;
     user-select: none;
 }
-.column__content_list__item {
-    height: 42px;
-    width: 100%;
-    line-height: 40px;
-    border: 0;
-    margin-top: 15px;
-}
-
-/*
-******************************************************
-комбо из 2 полей
-******************************************************
-*/
-
-.list_input{
-    border-radius: 5px 0 0 5px;
-    background: #e9ecf0;
-    color: #5e6e80;
-    float: left;
-    width: 76%;
-    border: 0;
-    height: 40px;
-    font-size: 16px;
-    padding-left: 1.5%;
-    padding-right: 1.5%;
-    margin-right: 0.5%;
-
-    animation-name: input_animate;
-    animation-duration: 0.4s;
-}
-
-.list_select {
-    border-radius: 0 5px 5px 0;
-    background: #e9ecf0;
-    color: #5e6e80;
-    float: left;
-    width: 17.5%;
-    border: 0;
-    height: 40px;
-    font-size: 16px;
-    padding-left: 1.5%;
-    padding-right: 1.5%;
-
-    animation-name: input_animate;
-    animation-duration: 0.4s;
-}
-
-/*
-**********************************************************
-текстовый инпут
-**********************************************************
-*/
-
-.column__content__input {
-    height: 40px;
-    width:97%;
-    padding-left: 1.5%;
-    padding-right: 1.5%;
-    background: #e9ecf0;
-    line-height: 40px;
-    font-size: 16px;
-    color: #5e6e80;
-    border: 0;
-    -webkit-border-radius:5px;
-    -moz-border-radius:5px;
-    border-radius:5px;
-    margin-top: 15px;
-
-    animation-name: input_animate;
-    animation-duration: 0.4s;
-}
-
-/*
-**********************************************************
-чекбокс
-**********************************************************
-*/
-
-.column__content__checkbox {
-    width: 100%;
-    height: 26px;
-    padding-top: 15px;
-}
-.checkbox {
-    vertical-align: top;
-    margin: 0 3px 0 0;
-    width: 100%;
-    margin-top: 10px;
-
-}
-.checkbox + label {
-    cursor: pointer;
-    margin-top: 20px;
-}
-.checkbox:not(checked) {
-    position: absolute;
-    opacity: 0;
-    display:none;
-}
-.checkbox:not(checked) + label {
-    position: relative;
-    padding: 0 0 0 60px;
-}
-.checkbox:not(checked) + label:before {
-    content: '';
-    position: absolute;
-    top: -4px;
-    left: 0;
-    width: 50px;
-    height: 26px;
-    border-radius: 13px;
-    background: #CDD1DA;
-}
-.checkbox:not(checked) + label:after {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: 2px;
-    width: 22px;
-    height: 22px;
-    border-radius: 10px;
-    background: #FFF;
-    transition: all .2s;
-}
-.checkbox:checked + label:before {
-    background: #0f7787;
-}
-.checkbox:checked + label:after {
-    left: 26px;
-}
-
-/*
-**********************************************************
-кнопка сгенерировать комментарий
-**********************************************************
-*/
-.column__content__submit {
-    width: 100%;
-    height: 40px;
-    margin-top: 25px;
-}
-.column__content__submit div {
-    background: #0f7787;
-    display: block;
-    width: 300px;
-    margin: 0 auto;
-    border: 0;
-    -webkit-border-radius:5px;
-    -moz-border-radius:5px;
-    border-radius:5px;
-    line-height: 40px;
-    font-size: 16px;
-    color: #ffffff;
-    cursor: pointer;
-    text-align: center;
-
-    -ms-user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
-}
-/*
-**********************************************************
-кнопки сообщения
-**********************************************************
-*/
-/* анимация появления сообщения */
-@keyframes message_animate {
-    from {
-        margin-top: -200px;
-    }
-    to {
-        margin-top: 0;
-    }
-}
-.open {
-    display: inline-block;
-    animation-name: message_animate;
-    animation-duration: 1s;
-}
-.message span {
-    display: inline-block;
-    float: left;
-}
-.message__buttons {
-    display: inline-block;
-    float:right;
-    width: 320px;
-}
-.message__accept {
-    width: 150px;
-    float: right;
-    background: #0f7787;
-    line-height: 40px;
-    border: 0;
-    border-radius: 5px;
-    -webkit-border-radius:5px;
-    -moz-border-radius:5px;
-    color: #ffffff;
-    font-size: 16px;
-    cursor: pointer;
-    margin-left: 5px;
-    margin-right: 5px;
-    padding: 0;
-
-    -ms-user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
-}
-.message__cancel {
-    width: 150px;
-    float: right;
-    background: #f56c6c;
-    line-height: 40px;
-    border: 0;
-    border-radius: 5px;
-    -webkit-border-radius:5px;
-    -moz-border-radius:5px;
-    color: #ffffff;
-    font-size: 16px;
-    margin-left: 5px;
-    margin-right: 5px;
-    cursor: pointer;
-    padding: 0;
-
-    -ms-user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
-}
-
-
-/*
-**********************************************************
-кнопка скопировать в буфер
-**********************************************************
-*/
-.column__content_list__example {
-    width: 200px;
-    display: inline-block;
-    background: #ffffff;
-    line-height: 36px;
-    border: 2px solid #e9ecf0;
-    text-align: center;
-    border-radius: 5px;
-    -webkit-border-radius:5px;
-    -moz-border-radius:5px;
-    font-size: 16px;
-    margin-left: 5px;
-    margin-right: 5px;
-    cursor: pointer;
-    padding: 0;
-
-    -ms-user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
-}
-.column__content_list__example:hover {
-    background: #e9ecf0;
-    transition: all .2s;
-}
-
-/*
-**********************************************************
-кнопка добавления теста
-**********************************************************
-*/
-.column__content_list__addTests:before {
+.block-inputs__add-item-button--test:before {
     width: 50px;
     content: "+";
     font-size: 32px;
@@ -512,7 +306,7 @@ body {
     display: block;
     float: left;
 }
-.column__content_list__addTests {
+.block-inputs__add-item-button--test {
     background: #0f7787;
     display: block;
     width: 195px;
@@ -534,11 +328,188 @@ body {
     user-select: none;
 }
 /*
-**********************************************************
-кнопка генерирования тестов
-**********************************************************
+============================================================
+элементы ввода
+============================================================
 */
-.generate_test {
+/*
+============================================================
+2 текстовых поля на комменты
+*/
+.text-input--left{
+    border-radius: 5px 0 0 5px;
+    background: #e9ecf0;
+    color: #5e6e80;
+    float: left;
+    width: 76%;
+    border: 0;
+    height: 40px;
+    font-size: 16px;
+    padding-left: 1.5%;
+    padding-right: 1.5%;
+    margin-right: 0.5%;
+
+    animation-name: input_animate;
+    animation-duration: 0.4s;
+}
+.text-input--right {
+    border-radius: 0 5px 5px 0;
+    background: #e9ecf0;
+    color: #5e6e80;
+    float: left;
+    width: 17.5%;
+    border: 0;
+    height: 40px;
+    font-size: 16px;
+    padding-left: 1.5%;
+    padding-right: 1.5%;
+
+    animation-name: input_animate;
+    animation-duration: 0.4s;
+}
+/*
+============================================================
+обычное текстовое поле
+*/
+.text-input--full {
+    height: 40px;
+    width:97%;
+    padding-left: 1.5%;
+    padding-right: 1.5%;
+    background: #e9ecf0;
+    line-height: 40px;
+    font-size: 16px;
+    color: #5e6e80;
+    border: 0;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+    margin-top: 15px;
+
+    animation-name: input_animate;
+    animation-duration: 0.4s;
+}
+/*
+============================================================
+чекбокс
+*/
+.checkbox-input {
+    width: 100%;
+    height: 26px;
+    padding-top: 15px;
+}
+.checkbox-input__input {
+    vertical-align: top;
+    margin: 0 3px 0 0;
+    width: 100%;
+    margin-top: 10px;
+
+}
+.checkbox-input__input + label {
+    cursor: pointer;
+    margin-top: 20px;
+}
+.checkbox-input__input:not(checked) {
+    position: absolute;
+    opacity: 0;
+    display:none;
+}
+.checkbox-input__input:not(checked) + label {
+    position: relative;
+    padding: 0 0 0 60px;
+}
+.checkbox-input__input:not(checked) + label:before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 0;
+    width: 50px;
+    height: 26px;
+    border-radius: 13px;
+    background: #CDD1DA;
+}
+.checkbox-input__input:not(checked) + label:after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 2px;
+    width: 22px;
+    height: 22px;
+    border-radius: 10px;
+    background: #FFF;
+    transition: all .2s;
+}
+.checkbox-input__input:checked + label:before {
+    background: #0f7787;
+}
+.checkbox-input__input:checked + label:after {
+    left: 26px;
+}
+/*
+============================================================
+кнопка сгенерировать комментарий
+*/
+.submit-input--comment {
+    width: 100%;
+    height: 40px;
+    margin-top: 25px;
+}
+.submit-input--comment div {
+    background: #0f7787;
+    display: block;
+    width: 300px;
+    margin: 0 auto;
+    border: 0;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+    line-height: 40px;
+    font-size: 16px;
+    color: #ffffff;
+    cursor: pointer;
+    text-align: center;
+
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+/*
+============================================================
+кнопка скопировать в буфер
+*/
+.submit-input--example {
+    width: 200px;
+    display: inline-block;
+    background: #ffffff;
+    line-height: 36px;
+    border: 2px solid #e9ecf0;
+    text-align: center;
+    border-radius: 5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    font-size: 16px;
+    margin-left: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+    padding: 0;
+
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+.submit-input--example:hover {
+    background: #e9ecf0;
+    transition: all .2s;
+}
+/*
+============================================================
+кнопка сгенерировать тесты
+*/
+.submit-input--test {
     background: #0f7787;
     display: block;
     height: 40px;
@@ -560,23 +531,11 @@ body {
     -webkit-user-select: none;
     user-select: none;
 }
-
 /*
-************************************************************
-2 текстовых поля в тестх
-************************************************************
+============================================================
+текстовые поля для ввода тестов
 */
-/* анимация для появления всех полей */
-@keyframes input_animate {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-.list_input__test{
+.text-input--left-test{
     border-radius: 5px 0 0 5px;
     background: #e9ecf0;
     color: #5e6e80;
@@ -592,8 +551,7 @@ body {
     animation-name: input_animate;
     animation-duration: 0.4s;
 }
-
-.list_select__test {
+.text-input--right-test {
     border-radius: 0 5px 5px 0;
     background: #e9ecf0;
     color: #5e6e80;
@@ -608,36 +566,66 @@ body {
     animation-name: input_animate;
     animation-duration: 0.4s;
 }
-
 /*
-**********************************************************
+============================================================
 адаптивность
-**********************************************************
+============================================================
 */
 @media screen and (max-width: 1399px) {
-    .list_input{ width: 66%; }
-    .list_select { width: 27.5%; }
+    .text-input--left{ width: 66%; }
+    .text-input--right { width: 27.5%; }
 }
 @media screen and (max-width: 999px) {
-    .list_input{ width: 76%; }
-    .list_select { width: 17.5%; }
+    .text-input--left{ width: 76%; }
+    .text-input--right { width: 17.5%; }
     .column {clear: both; width: 99%;}
 }
 @media screen and (max-width: 880px) {
-    .message span {  clear: both; width: 100%; text-align: center}
-    .message__buttons { float: none; margin: 0 auto; display: block;}
+    .cookie-message span {  clear: both; width: 100%; text-align: center}
+    .cookie-message__buttons { float: none; margin: 0 auto; display: block;}
 }
 @media screen and (max-width: 699px) {
-    .list_input{ width: 66%; }
-    .list_select { width: 27.5%; }
+    .text-input--left{ width: 66%; }
+    .text-input--right { width: 27.5%; }
 }
-
 /*
-***********************************************************
-костыль чтобы content растягивался по высоте своих детей
-***********************************************************
+============================================================
+анимация
+============================================================
 */
-.content:after {
+/* анимация появления сообщения */
+@keyframes message_animate {
+    from {
+        margin-top: -200px;
+    }
+    to {
+        margin-top: 0;
+    }
+}
+/* анимация для появления всех полей */
+@keyframes input_animate {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+/* эфект всплытия сообщения */
+@keyframes alert_animations {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.7;
+    }
+}
+/*
+============================================================
+костыль чтобы content растягивался по высоте своих детей
+============================================================
+*/
+.wrap__content:after {
     clear: both;
     display: block;
     content: " ";

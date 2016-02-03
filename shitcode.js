@@ -295,21 +295,11 @@ var cookieWorker = (function(){
     };
 })();
 
-var messageObject = (function(){
-    return {
-        takeMessage : function(message) {
-            if (message !== undefined) {
-                alert("msg: " + message);
-            }
-        }
-    };
-})();
-
 var Application = (function(){
     return {
         run : function(){
             if (cookieWorker.existCookie(testObject.nameCookie) || cookieWorker.existCookie(commentObject.nameCookie)) {
-                document.getElementById("cookieMessage").classList.add("open");
+                document.getElementById("cookieMessage").classList.add("cookie-message--open");
                 Application.rebuildInterface();
             }
         },
@@ -347,7 +337,7 @@ var Application = (function(){
         deleteDataButton : function(){
             cookieWorker.deleteCookie( commentObject.nameCookie );
             cookieWorker.deleteCookie( testObject.nameCookie );
-            document.getElementById("cookieMessage").classList.remove("open");
+            this.closeCookieMessage();
             messageManager.takeMessage("Данные предыдущей сессии удалены");
         },
         testAddButton : function(){
@@ -376,11 +366,11 @@ var Application = (function(){
             messageManager.takeMessage("Все поля очищены");
         },
         closeCookieMessage : function(){
-            document.getElementById("cookieMessage").classList.remove("open");
+            document.getElementById("cookieMessage").classList.remove("cookie-message--open");
             Application.rebuildInterface();
         },
         rebuildInterface : function() {
-            document.getElementById("pool_message").style.top = document.getElementById("cookieMessage").offsetHeight + "px";
+            document.getElementById("pool-message").style.top = document.getElementById("cookieMessage").offsetHeight + "px";
         }
     };
 })();
@@ -404,14 +394,14 @@ var messageManager = (function(){
 function MessageObject(message) {
 
     this.divmessage = document.createElement('div');
-    this.divmessage.className = "alert";
+    this.divmessage.className = "pool-message__message--alert";
     this.divmessage.innerHTML = message;
     //добавление вверх страницы
-    //document.getElementById("pool_message").insertBefore(this.divmessage, document.getElementById("pool_message").children[0]);
+    //document.getElementById("pool-message").insertBefore(this.divmessage, document.getElementById("pool-message").children[0]);
     //добавление последовательно вниз
-    document.getElementById("pool_message").appendChild(this.divmessage);
+    document.getElementById("pool-message").appendChild(this.divmessage);
     this.divmessage.closeDiv = function(){
-        document.getElementById("pool_message").removeChild(this);
+        document.getElementById("pool-message").removeChild(this);
     };
     this.divmessage.addEventListener("click", this.divmessage.closeDiv);
     this.selfDestruction = function(){
